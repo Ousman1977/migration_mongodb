@@ -1,0 +1,18 @@
+ # Utilise l'image officielle Python comme base
+FROM python:3.11-slim
+
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers requirements.txt et migrate.py dans le conteneur
+COPY requirements.txt .
+COPY migrate.py .
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier tous les autres fichiers (si nécessaire)
+COPY . .
+
+# Définir la commande à exécuter quand le conteneur démarre
+CMD ["python", "migrate.py"]
